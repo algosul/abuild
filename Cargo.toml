@@ -1,14 +1,14 @@
 [package]
 name = "abuild"
-version.workspace = true
-authors.workspace = true
-homepage.workspace = true
-repository.workspace = true
-keywords.workspace = true
-license.workspace = true
-edition.workspace = true
-description.workspace = true
-documentation.workspace = true
+version = "0.0.1"
+authors = ["algosul@github.com"]
+homepage = "https://github.com/algosul/abuild"
+repository = "https://github.com/algosul/abuild"
+keywords = ["annasul", "build"]
+license = "AGPL-3.0-only"
+edition = "2024"
+description = "Some user-friendly yet personalized tools"
+documentation = "https://docs.rs/abuild"
 
 [lib]
 name = "abuild"
