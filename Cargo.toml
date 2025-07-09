@@ -19,6 +19,6 @@ name = "abuild"
 path = "src/bin/main.rs"
 
 [dependencies]
-clap = { version = "*", features = ["cargo", "derive", "unicode"] }
+clap = { version = "*", features = ["cargo", "derive", "unicode", "string"] }
 clap_complete = "*"
 colored = "*"
