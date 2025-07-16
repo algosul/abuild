@@ -6,6 +6,7 @@ use std::{
 use crate::{
     command::Commands,
     feature::Features,
+    module::{DynModule, DynModuleImpl},
     profile::Profiles,
     target::Targets,
 };
@@ -65,23 +66,25 @@ impl std::error::Error for Error {
 pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug, Clone, PartialEq)]
 pub struct Project {
-    name:               String,
-    relative_directory: PathBuf,
-    version:            String,
-    profiles:           Profiles,
-    targets:            Targets,
-    features:           Features,
-    commands:           Commands<Project>,
+    name:      String,
+    directory: PathBuf,
+    version:   String,
+    profiles:  Profiles,
+    targets:   Targets,
+    features:  Features,
+    commands:  Commands<Project>,
+    modules:   Vec<DynModule<Project>>,
 }
 #[derive(Default, Debug, Clone, PartialEq)]
 pub struct ProjectBuilder {
-    name:               Option<String>,
-    relative_directory: Option<PathBuf>,
-    version:            Option<String>,
-    profiles:           Option<Profiles>,
-    targets:            Option<Targets>,
-    features:           Option<Features>,
-    commands:           Option<Commands<Project>>,
+    name:      Option<String>,
+    directory: Option<PathBuf>,
+    version:   Option<String>,
+    profiles:  Option<Profiles>,
+    targets:   Option<Targets>,
+    features:  Option<Features>,
+    commands:  Option<Commands<Project>>,
+    modules:   Vec<DynModule<Project>>,
 }
 impl Project {
     pub fn try_default() -> Result<Self> { Self::builder().build() }
@@ -94,10 +97,8 @@ impl ProjectBuilder {
         self
     }
 
-    pub fn relative_directory(
-        &mut self, relative_directory: impl Into<PathBuf>,
-    ) -> &mut Self {
-        self.relative_directory = Some(relative_directory.into());
+    pub fn directory(&mut self, directory: impl Into<PathBuf>) -> &mut Self {
+        self.directory = Some(directory.into());
         self
     }
 
@@ -128,43 +129,42 @@ impl ProjectBuilder {
 
     pub fn build(&self) -> Result<Project> {
         Ok(Project {
-            name:               self
+            name:      self
                 .name
                 .as_ref()
                 .ok_or(Error::BuilderArg("No name provided".to_string()))?
                 .clone(),
-            relative_directory: self
-                .relative_directory
+            directory: self
+                .directory
                 .as_ref()
-                .ok_or(Error::BuilderArg(
-                    "No relative_directory provided".to_string(),
-                ))?
+                .ok_or(Error::BuilderArg("No directory provided".to_string()))?
                 .clone(),
-            version:            self
+            version:   self
                 .version
                 .as_ref()
                 .ok_or(Error::BuilderArg("No version provided".to_string()))?
                 .clone(),
-            profiles:           self
+            profiles:  self
                 .profiles
                 .as_ref()
                 .ok_or(Error::BuilderArg("No profiles provided".to_string()))?
                 .clone(),
-            targets:            self
+            targets:   self
                 .targets
                 .as_ref()
                 .ok_or(Error::BuilderArg("No targets provided".to_string()))?
                 .clone(),
-            features:           self
+            features:  self
                 .features
                 .as_ref()
                 .ok_or(Error::BuilderArg("No features provided".to_string()))?
                 .clone(),
-            commands:           self
+            commands:  self
                 .commands
                 .as_ref()
                 .ok_or(Error::BuilderArg("No commands provided".to_string()))?
                 .clone(),
+            modules:   self.modules.clone(),
         })
     }
 }
@@ -174,7 +174,7 @@ pub(crate) mod tests {
     pub(crate) fn project() -> Result<Project> {
         Project::builder()
             .name("test")
-            .relative_directory("project")
+            .directory("project")
             .version("0.1.0")
             .profiles(Profiles::try_default()?)
             .targets(Targets::try_default()?)

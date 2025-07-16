@@ -18,6 +18,10 @@ crate-type = ["rlib"]
 name = "abuild"
 path = "src/bin/main.rs"
 
+[[test]]
+name = "abuild-project"
+path = "tests/project.rs"
+
 [dependencies]
 clap = { version = "*", features = ["cargo", "derive", "unicode", "string"] }
 clap_complete = "*"

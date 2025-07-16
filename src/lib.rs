@@ -1,3 +1,4 @@
+#![feature(associated_type_defaults)]
 //! Example
 //! ```sh
 //! $ abuild new -w my-workspace
@@ -14,6 +15,7 @@
 pub mod command;
 pub mod feature;
 pub mod lang;
+pub mod module;
 pub mod profile;
 pub mod project;
 pub mod target;
