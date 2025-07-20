@@ -9,6 +9,7 @@ license = "AGPL-3.0-only"
 edition = "2024"
 description = "Some user-friendly yet personalized tools"
 documentation = "https://docs.rs/abuild"
+build = "build.rs"
 
 [lib]
 name = "abuild"
