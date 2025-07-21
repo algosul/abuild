@@ -4,11 +4,10 @@ version = "0.0.1"
 authors = ["algosul@github.com"]
 homepage = "https://github.com/algosul/abuild"
 repository = "https://github.com/algosul/abuild"
-keywords = ["annasul", "build"]
+keywords = ["algosul", "build"]
 license = "AGPL-3.0-only"
 edition = "2024"
 description = "Some user-friendly yet personalized tools"
-documentation = "https://docs.rs/abuild"
 build = "build.rs"
 
 [lib]
