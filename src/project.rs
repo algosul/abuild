@@ -1,12 +1,13 @@
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
+    sync::Arc,
 };
 
 use crate::{
     command::Commands,
     feature::Features,
-    module::{DynModule, DynModuleImpl},
+    module::Module,
     profile::Profiles,
     target::Targets,
 };
@@ -73,7 +74,7 @@ pub struct Project {
     targets:   Targets,
     features:  Features,
     commands:  Commands<Project>,
-    modules:   Vec<DynModule<Project>>,
+    modules:   Vec<Box<dyn Module<Arc<Project>>>>,
 }
 #[derive(Default, Debug, Clone, PartialEq)]
 pub struct ProjectBuilder {
@@ -84,7 +85,7 @@ pub struct ProjectBuilder {
     targets:   Option<Targets>,
     features:  Option<Features>,
     commands:  Option<Commands<Project>>,
-    modules:   Vec<DynModule<Project>>,
+    modules:   Vec<Box<dyn Module<Arc<Project>>>>,
 }
 impl Project {
     pub fn try_default() -> Result<Self> { Self::builder().build() }
@@ -122,8 +123,8 @@ impl ProjectBuilder {
         self
     }
 
-    pub fn features(&mut self, feature: Features) -> &mut Self {
-        self.features = Some(feature);
+    pub fn features(&mut self, features: Features) -> &mut Self {
+        self.features = Some(features);
         self
     }
 
