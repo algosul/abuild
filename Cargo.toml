@@ -26,3 +26,9 @@ path = "tests/project.rs"
 clap = { version = "*", features = ["cargo", "derive", "unicode", "string"] }
 clap_complete = "*"
 colored = "*"
+algosul = { version = "0.0.5", features = ["app-apps"] }
+thiserror = { version = "2.0.14" }
+
+[dependencies.strum]
+version = "0.27.2"
+features = ["derive"]

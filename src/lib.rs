@@ -13,12 +13,7 @@
 //! ...
 //! ```
 pub mod command;
-pub mod feature;
-pub mod lang;
-pub mod module;
-pub mod profile;
-pub mod project;
-pub mod target;
+pub mod compile;
 pub mod workspace;
 /// the app name
 pub const NAME: &str = env!("CARGO_PKG_NAME");
