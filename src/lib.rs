@@ -1,17 +1,4 @@
 #![feature(associated_type_defaults)]
-//! Example
-//! ```sh
-//! $ abuild new -w my-workspace
-//! ...
-//! $ cd my-workspace
-//! $ abuild new -j my-project -l rust
-//! ...
-//! $ abuild run
-//! ...
-//! Hello, world!
-//! $ abuild clean
-//! ...
-//! ```
 pub mod command;
 pub mod compile;
 pub mod workspace;

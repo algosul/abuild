@@ -9,6 +9,7 @@ license = "AGPL-3.0-only"
 edition = "2024"
 description = "Some user-friendly yet personalized tools"
 build = "build.rs"
+readme = "README.md"
 
 [lib]
 name = "abuild"
@@ -17,10 +18,6 @@ crate-type = ["rlib"]
 [[bin]]
 name = "abuild"
 path = "src/bin/main.rs"
-
-[[test]]
-name = "abuild-project"
-path = "tests/project.rs"
 
 [dependencies]
 clap = { version = "*", features = ["cargo", "derive", "unicode", "string"] }
