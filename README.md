@@ -1,7 +1,7 @@
 
 # abuild
 
-a build tool
+A build tool
 
 ## 🚧 Work in Progress 🚧
 
@@ -22,7 +22,7 @@ Any derivative work must be **open source** under the same license.
 
 ## Introduction
 
-A math tool
+A build tool
 
 ## Document
 
