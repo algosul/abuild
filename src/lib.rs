@@ -21,7 +21,7 @@ mod test {
             .main("main.rs")
             .rust_edition(langs::rust::Edition::_2024)
             .rustc(langs::rust::ComplierSelector::Host)
-            .cargo(langs::rust::CargoSelector::Host)
+            .cargo(langs::rust::CargoSelector::Host);
 
         // (prelude) build::ModuleHostBuilderExt
         let builder = module.host_builder().unwarp();
