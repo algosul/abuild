@@ -1,0 +1,28 @@
+name: Project test
+
+on:
+  push:
+    branches-ignore: [ "push-*" ]
+  pull_request:
+    branches-ignore: [ "push-*" ]
+
+jobs:
+  code-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchains
+        uses: dtolnay/rust-toolchain@stable
+      
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      
+      - name: Run Tests
+        run: cargo test --all-targets --all-features --verbose
+      
+      - name: Run Document Tests
+        run: cargo test --doc --all-features --verbose
