@@ -11,9 +11,6 @@ crate-type = ["rlib"]
 [[bin]]
 name = "abuild-cli"
 
-[[test]]
-name = "example-0"
-
 [dependencies]
 log.workspace = true
 env_logger.workspace = true
