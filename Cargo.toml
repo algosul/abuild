@@ -10,10 +10,14 @@ crate-type = ["rlib"]
 
 [[bin]]
 name = "abuild-cli"
+path = "src/bin/cli/main.rs"
 
 [dependencies]
 log.workspace = true
 env_logger.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }
 
 [workspace]
 members = ["."]
@@ -21,7 +25,8 @@ resolver = "3"
 
 [workspace.dependencies]
 log = { version = "0.4.29" }
-env_logger = "*"
+env_logger = { version = "0.11.10" }
+tokio = { version = "1.52.2" }
 
 [profile.dev]
 

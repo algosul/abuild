@@ -1,3 +1,8 @@
 
 # --- Output Directory ---
 /output
+
+# --- IDE Directory ---
+.vs/
+.vscode/
+.idea/

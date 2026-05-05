@@ -1,3 +1,0 @@
-[submodule "docs/abuild-docs"]
-	path = docs/abuild-docs
-	url = https://github.com/algosul/abuild-docs.git

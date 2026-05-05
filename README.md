@@ -1,4 +1,3 @@
-
 # abuild
 
 A build tool
@@ -26,4 +25,4 @@ A build tool
 
 ## Document
 
-<https://github.com/algosul/abuild-docs>
+<https://algosul.github.io/abuild/docs>

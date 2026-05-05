@@ -1,0 +1,221 @@
+%%{
+  init: {
+    'theme': 'redux dark', 
+  }
+}%%
+graph BT
+  classDef abstract fill:#828, stroke: #f8f, stroke-width:2px, color: #fff;
+  classDef std fill:#228, stroke: #88f,stroke-width:2px, color: #fff;
+  classDef interface fill:#822, stroke: #f88,stroke-width:2px,stroke-dasharray: 5 5, color: #fff;
+  classDef crate fill:#882, stroke: #ff8,stroke-width:2px, color: #fff;
+  classDef tool fill:#282, stroke: #8f8,stroke-width:2px, color: #fff;
+  classDef function fill:#288, stroke: #8ff,stroke-width:2px, color: #fff;
+  classDef view fill:#852, stroke: #fb8,stroke-width:2px, color: #fff;
+
+  linkStyle default stroke:#fff, stroke-width:1px;
+
+  subgraph STD
+
+    Read{Read}:::std
+    Write{Write}:::std
+
+  end
+
+  subgraph Abstract
+
+    Profile{Profile}:::interface
+
+    subgraph TargetProfiles
+      
+      TargetProfile:::abstract
+      GDExtensionExportProfile:::abstract
+
+      TargetProfile & GDExtensionExportProfile --o Profile
+
+    end
+
+    subgraph LanguageProfiles
+      
+      CProfile:::abstract
+      CPPProfile:::abstract
+      RustProfile:::abstract
+      GDScriptProfile:::abstract
+
+      CProfile & CPPProfile & RustProfile & GDScriptProfile --o Profile
+
+    end
+
+    subgraph AbstractIO
+
+      File{File}:::interface
+
+      StdFile:::abstract
+      SFTPFile:::abstract
+      RAsyncFile:::abstract
+
+      Directory{Directory}:::interface
+
+      StdDirectory:::abstract
+      SFTPDirectory:::abstract
+      RAsyncDirectory:::abstract
+
+      FileCommand{FileCommand}:::interface
+
+      StdCommand:::abstract
+      SSHCommand:::abstract
+
+      StdFile & SFTPFile & RAsyncFile --o File
+
+      StdDirectory & SFTPDirectory & RAsyncDirectory --o Directory
+
+      StdCommand & SSHCommand --o FileCommand
+
+      File --> FileCommand
+
+      File ---o Read & Write
+
+    end
+
+    subgraph Modules
+
+      ModuleModel:::abstract
+
+      ModuleFiles{ModuleFiles}:::interface
+      ModuleChilds{ModuleChilds}:::interface
+
+      ModuleFiles --> File & Directory
+
+      ModuleModel --o ModuleFiles & ModuleChilds
+    
+    end
+
+  end
+
+  subgraph Tools
+
+    subgraph Linkers
+
+      Linker{Linker}:::interface
+
+      LLVMLinker:::tool
+
+      LinkerFactory:::tool
+
+      LinkerFactory --> LLVMLinker --o Linker
+
+    end
+
+    subgraph Compilers
+
+      Compiler{Compiler}:::interface
+
+      GCC:::tool
+      Clang:::tool
+      MSVC:::tool
+      Rustc:::tool
+
+      CompilerFactory:::tool
+
+      CompilerFactory --> GCC & Clang & MSVC & Rustc --o Compiler
+              
+    end
+
+    subgraph Backend
+
+      CargoBackend:::tool
+      MakefileBackend:::tool
+      NinjaBackend:::tool
+      CMakeBackend:::tool
+
+    end
+
+    subgraph Init
+
+      ModuleInit{ModuleInit}:::interface
+
+      DefaultInit:::tool
+      GDExtensionInit:::tool
+
+      ModuleInitFactory:::tool
+
+      ModuleInitFactory --> DefaultInit & GDExtensionInit --o ModuleInit
+
+    end
+
+    subgraph Run
+
+      ModuleRunner{ModuleRunner}:::interface
+
+      DefaultRunner:::tool
+
+      ModuleRunnerFactory:::tool
+
+      ModuleRunnerFactory --> DefaultRunner --o ModuleRunner ---> ModuleFiles
+
+    end
+
+    subgraph Clean
+
+      ModuleCleaner{ModuleCleaner}:::interface
+
+      DefaultCleaner:::tool
+
+      ModuleCleanerFactory:::tool
+
+      ModuleCleanerFactory --> DefaultCleaner --o ModuleCleaner ---> ModuleFiles
+
+    end
+
+    subgraph Build
+
+      BuildPipeline{BuildPipeline}:::interface
+
+      DefaultBuildPipeline:::tool
+
+      BuildPipelineFactory:::tool
+
+      BuildPipelineFactory --> DefaultBuildPipeline --> CompilerFactory & LinkerFactory
+
+      BuildPipeline -----> Profile & ModuleFiles
+
+      DefaultBuildPipeline --o BuildPipeline
+
+    end
+
+  end
+
+  subgraph Functions
+
+    ModuleManager:::function
+
+    ModuleManager ---> ModuleInitFactory & BuildPipelineFactory & ModuleCleanerFactory & ModuleRunnerFactory
+ 
+  end
+
+  subgraph View
+
+    Presenter:::view
+
+    CLI:::view
+
+    ConsoleView:::view
+
+    VSCodeExtension:::view
+
+    CLI & Presenter --> ModuleManager
+
+    ConsoleView & VSCodeExtension --> Presenter
+
+  end
+
+  subgraph Crates
+
+    std:::crate
+    serde:::crate
+    algosul:::crate
+
+  end
+
+
+
+   

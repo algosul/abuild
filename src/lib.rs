@@ -1,9 +1,15 @@
+pub mod langs;
+pub mod module;
+pub mod prelude;
+
 #[cfg(test)]
 mod test
 {
+  use std::path::Path;
+
   use super::{prelude::v1::*, *};
 
-  const MANIFEST_DIR: &Path = Path::new(env!("CARGO_MANIFEST_DIR"));
+  const MANIFEST_DIR: &str = env!("CARGO_MANIFEST_DIR");
 
   #[tokio::test]
   async fn example_1()
@@ -14,7 +20,7 @@ mod test
       .name("example 1")
       .description("an example for test abuild")
       .version("0.0.1")
-      .dir(MANIFEST_DIR.join("tests/example_1"))
+      .dir(Path::new(MANIFEST_DIR).join("tests/example_1"))
       .source_dir("src")
       .output_dir("output")
       .target_dir("output/target")
