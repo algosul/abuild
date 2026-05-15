@@ -33,11 +33,41 @@
       - 上下文注入 (Context Injection)：运行时自动注入当前项目路径、环境变量、日志句柄等上下文信息
       - 生命周期钩子：支持 pre-run（执行前检查）和 post-run（执行后清理/通知）
 
-### 多种配置方式
+### 配置
+
+#### 多种配置方式
 
 + `TOML`：`config.toml`
 + `JSON`：`config.json`, `config.schema.json`
 + `cargo-script`：`config.rs`
+
+```toml
+# abuild.toml
+[module]
+name = "my_module"
+author = "author <example.com>"
+version = "0.1.0"
+edition = "2026" # 指定构建工具的“语言”版本
+
+[module.lib]
+types = ["lib", "dylib", "clib", "cdylib"]
+
+[[submodule]]
+name = "submodule1"
+path = "modules/submodule1"
+
+[dependencies]
+core_lib = { path = "../core", version = "1.0" }
+# 支持 Git 依赖
+utils = { git = "https://github.com/example/utils.git", branch = "main" }
+
+[profile.rust]
+file = "rust.toml"
+
+[profile.dev.rust]
+file = "dev.rust.toml"
+
+```
 
 ### 全生命周期支持
 
