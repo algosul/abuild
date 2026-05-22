@@ -1,4 +1,44 @@
-
 # Design Document
 
-+ [architecture](./design/architecture.md)
+## Design Goals
+
+### Extensibility
+
+See [Extensibility](./design/ext.md)
+
+### Ergonomics
+
+#### Configs
+
+See [Configs](./design/configs.md)
+
+#### Messages
+
+See [Messages](design/messages.md)
+
+### Universality
+
+#### I18n
+
+1. First, select the language based on [the configuration](#Configs).
+   See [Language Config](./design/configs/locale.md#language-configuration).
+2. Backtrack：`LC_ALL`, `LANG`
+
+#### Languages
+
+- **Native support**: Rust, C, C++, Zig
+- **Extended support**: Reserved interfaces to support future other system-level programming languages
+
+#### Platforms
+
+- Linux (GNU/Musl)
+  - Arch Linux
+  - Ubuntu
+  - Android
+- Windows (MSVC/MinGW)
+- macOS (Apple Silicon)
+- FreeBSD
+
+## Architecture
+
+See [Architecture](./design/architecture.md)
