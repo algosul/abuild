@@ -6,8 +6,6 @@
 
 ## 二、模块管理 (Module Management)
 
-> 这里的模块管理不是本工具的模块化
-
 ### 核心特性
 
 - **模块**：支持按模块（Module-by-module）进行独立编译与依赖管理
@@ -118,13 +116,49 @@ file = "dev.rust.toml"
   - Android
 - Windows (MSVC/MinGW)
 - macOS (Apple Silicon)
-- FreeBSD
+- Unix-like
 
 ## 六、视图与交互接口 (Views & Interfaces)
 
 ### API 层 (abuild-lib)
 
 提供核心构建逻辑的编程接口，允许第三方工具集成abuild的能力
+
+```rust
+use std::path::Path;
+
+use super::{prelude::v1::*, *};
+
+const MANIFEST_DIR: &str = env!("CARGO_MANIFEST_DIR");
+
+#[tokio::test]
+async fn example_1()
+{
+  use crate::langs::RustModuleExt;
+  let module = module::Module::binary()
+    .identifier("example_1")
+    .name("example 1")
+    .description("an example for test abuild")
+    .version("0.0.1")
+    .dir(Path::new(MANIFEST_DIR).join("tests/example_1"))
+    .source_dir("src")
+    .output_dir("output")
+    .target_dir("output/target")
+    .cache_dir("output/cache")
+    .main("main.rs")
+    .rust_edition(langs::rust::Edition::_2024)
+    .rustc(langs::rust::ComplierSelector::Host)
+    .cargo(langs::rust::CargoSelector::Host);
+
+  // (prelude) build::ModuleHostBuilderExt
+  let builder = module.host_builder().unwarp();
+  builder.build().await.unwarp();
+
+  // (prelude) run::ModuleHostRunnerExt
+  let runner = module.host_runner().unwarp();
+  runner.run().await.unwarp(); // run ${target_dir}/host/example_1
+}
+```
 
 ### 命令行界面 (abuild-cli)
 
@@ -135,4 +169,16 @@ file = "dev.rust.toml"
 
 - **VS Code 扩展 (abuild/vscode-extension)**：提供任务集成、代码补全及调试支持
 - **JetBrains IDE 扩展 (abuild/idea-extension)**：适配IntelliJ IDEA, CLion, RustRover等，实现无缝构建集成
+
+## 七、可拓展（Extensibility）
+
+### 外部生态
+
++ [IDE 拓展生态](#ide-扩展生态)
+
+### 插件
+
++ [多语言支持](#多语言支持-languages)
++ [统一命令接口](#统一命令接口)
++ 平台特色功能支持
 
