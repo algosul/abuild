@@ -31,13 +31,7 @@ See [Messages](design/messages.md)
 
 #### Platforms
 
-- Linux (GNU/Musl)
-  - Arch Linux
-  - Ubuntu
-  - Android
-- Windows (MSVC/MinGW)
-- macOS (Apple Silicon)
-- FreeBSD
+See [Platforms](./design/platforms.md)
 
 ## Architecture
 

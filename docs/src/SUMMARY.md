@@ -11,4 +11,5 @@
   - [Extensibility](./design/ext.md)
     - [Plugin Identifier](./design/ext/plugin_id.md)
     - [Plugin Key](./design/ext/plugin_key.md)
+  - [Platforms](./design/platforms.md)
 - [Code Specification](./code-specification.md)
