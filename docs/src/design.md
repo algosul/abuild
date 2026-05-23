@@ -14,7 +14,7 @@ See [Configs](./design/configs.md)
 
 #### Messages
 
-See [Messages](design/messages.md)
+See [Messages](https://algosul.github.io/algosul-rs/docs/design/messages.html)
 
 ### Universality
 
