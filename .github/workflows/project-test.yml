@@ -11,7 +11,7 @@ on:
       - 'docs/**'
 
 jobs:
-  code-format:
+  project-test:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
