@@ -5,6 +5,10 @@ on:
     branches: [ "init" ]
     paths:
       - 'docs/**'
+  pull_request:
+    branches: [ "init" ]
+    paths:
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:
@@ -44,6 +48,7 @@ jobs:
         with:
           path: ./output/
   deploy:
+    if: github.ref_name == 'init' && github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}docs
