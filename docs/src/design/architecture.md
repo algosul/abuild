@@ -10,7 +10,7 @@
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   STD:::std
@@ -40,7 +40,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
   
   Profile{Profile}:::interface
@@ -64,7 +64,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
   
   Profile{Profile}:::interface
@@ -88,7 +88,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   subgraph Modules
@@ -118,7 +118,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   Core:::core
@@ -143,7 +143,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   Core:::core
@@ -168,7 +168,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   Profile:::core
@@ -205,7 +205,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
   subgraph Backend
 
@@ -225,7 +225,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
 
@@ -253,7 +253,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   subgraph Linkers
@@ -277,7 +277,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   subgraph Core
@@ -306,7 +306,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   subgraph Core
@@ -335,7 +335,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   subgraph Core
@@ -364,7 +364,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   ModuleInitFactory:::tool
@@ -389,7 +389,7 @@ graph BT
     'theme': 'redux dark', 
   }
 }%%
-graph BT
+graph TB
   {{#include mermaid-style}}
 
   ModuleManager:::function
