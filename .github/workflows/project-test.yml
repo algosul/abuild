@@ -2,9 +2,11 @@ name: Project test
 
 on:
   push:
-    branches-ignore: [ "push-*" ]
+    paths-ignore:
+      - 'docs/**'
   pull_request:
-    branches-ignore: [ "push-*" ]
+    paths-ignore:
+      - 'docs/**'
 
 jobs:
   code-format:
@@ -15,14 +17,14 @@ jobs:
 
       - name: Install Rust toolchains
         uses: dtolnay/rust-toolchain@stable
-      
+
       - name: Cache Cargo dependencies
         uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
-      
+
       - name: Run Tests
         run: cargo test --all-targets --all-features --verbose
-      
+
       - name: Run Document Tests
         run: cargo test --doc --all-features --verbose
