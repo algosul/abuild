@@ -1,5 +1,6 @@
-
 # Architecture
+
+> It is recommended to use dark themes
 
 ## 1. Overall Architecture
 
